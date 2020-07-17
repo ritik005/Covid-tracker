@@ -7,19 +7,27 @@ import styles from './App.module.css'
 export class App extends Component {
    state = {
       data: {},
+      country: '',
   }
   async componentDidMount() {
     const fetchedData = await fetchData();
     this.setState({ data: fetchedData });
   }
+  handleCountryChange = async (country) => {
+    const fetchedData = await fetchData(country);
+    this.setState({ data: fetchedData, country: country });
+  } 
+  
   render() {
-    const { data } = this.state;
+    const { data, country } = this.state;
     return (
       <Router>
-      <div className={ styles.container }>
         <Header />
-        <Cards data={ data }/>
-      </div>
+          <div className={ styles.container }>
+            <Cards data={ data }/>
+            <h2 className={styles.h2}> Pick a Country </h2>
+            <CountryPick handleCountryChange={ this.handleCountryChange } />
+          </div>
       </Router>
     )
   }
