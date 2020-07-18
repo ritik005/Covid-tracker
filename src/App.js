@@ -3,7 +3,6 @@ import { Header, Cards, Charts, CountryPick } from './components'
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import { fetchData } from './api'
 import styles from './App.module.css'
-
 export class App extends Component {
    state = {
       data: {},
@@ -27,6 +26,8 @@ export class App extends Component {
             <Cards data={ data }/>
             <h2 className={styles.h2}> Pick a Country </h2>
             <CountryPick handleCountryChange={ this.handleCountryChange } />
+            <h2> Charts </h2>
+            <Charts  data={data} country={country}/>
           </div>
       </Router>
     )
